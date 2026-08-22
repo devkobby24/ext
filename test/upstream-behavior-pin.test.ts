@@ -2,10 +2,17 @@ import { fullDiff, ResourceImpact } from '@aws-cdk/cloudformation-diff';
 import { describe, expect, it } from 'vitest';
 
 /**
- * Pins the exact @aws-cdk/cloudformation-diff behavior driftguard relies on.
+ * Pins the exact @aws-cdk/cloudformation-diff behaviors this tool relies on.
  * The package is not a stable public API and is pinned to an exact version;
- * when an upgrade changes any of these behaviors, this file fails loudly so
- * the classifier can be re-validated instead of silently drifting.
+ * when a dependency upgrade changes any of these behaviors, this file fails
+ * loudly so the classifier can be re-validated instead of silently drifting.
+ *
+ * One pin FAILS BY DESIGN when upstream ships a fix: the RetainExceptOnCreate
+ * and Snapshot removal misclassification we reported as
+ * https://github.com/aws/aws-cdk-cli/issues/1882. If that test fails after an
+ * upgrade, upstream fixed the bug — re-check the assumptions in
+ * OUTCOME_BY_EFFECTIVE_POLICY, update this pin, and record the change in
+ * NOTES.md.
  */
 
 function removalImpact(deletionPolicy: string | undefined): ResourceImpact {
