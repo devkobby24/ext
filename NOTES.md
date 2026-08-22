@@ -98,6 +98,14 @@ Decision log for destructive-diff (formerly working-named driftguard; entries be
 **Reason:** As stated: "drift" already means deployed-state divergence in IaC (CloudFormation drift detection, cdk drift) and this tool does something else — the npm conflict is a prompt to fix a naming error, not just to dodge it.
 **Evidence:** CloudFormation drift detection and the `cdk drift` command are established usages of the term for live-state divergence from the template, which this tool does not measure.
 
+## 2026-08-22 offline mode: --deployed-template
+
+**Proposed:** The deployed template comes only from a live read-only `GetTemplate` call.
+**Changed to:** `--deployed-template <file>` reads it from a JSON file instead, sharing every subsequent code path with the live mode. Motivations: CI jobs without AWS credentials can still gate; the full pipeline is testable without AWS (the run tests inject a stub fetcher, the CLI self-check in CI uses the flag); and the README's opening example could be produced honestly — this environment has no deployed stack, so the demo runs a real synthesized CDK app against a saved earlier synthesis, with the flag visible in the shown command rather than edited out.
+**Raised by:** Claude
+**Reason:** none, judgment call — the README requirement ("real output from running the tool against an actual CDK stack") could not be met against a live stack without deploying to the user's AWS account, which the tool's own read-only promise and common sense both forbid.
+**Evidence:** README example reproduced verbatim from `dist/cli.js --app cdk.out --deployed-template deployed-template.json` on 2026-08-22, exit code 2.
+
 ## 2026-08-22 renamed to destructive-diff, bin alias destdiff
 
 **Proposed:** Candidates lossgate (Claude's recommendation), destructive-diff, teardown-gate, demolition-diff, razegate — all verified free on npm with no exact-name GitHub or AWS/CDK tool collisions.
