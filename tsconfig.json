@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022"],
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "strict": true,
+    "types": ["node"],
+    "noUncheckedIndexedAccess": true,
+    "noEmit": true,
+    "declaration": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    // @aws-cdk/cloudformation-diff ships declaration files referencing its optional
+    // peer @aws-sdk/client-cloudformation; skipLibCheck keeps our own code strictly
+    // checked without type-checking third-party declarations.
+    "skipLibCheck": true
+  },
+  "include": ["src", "test"]
+}
