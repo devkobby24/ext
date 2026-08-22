@@ -1,4 +1,5 @@
 import type { Detection, Severity } from '../classify/types.js';
+import type { StatefulResourceRule } from '../rules/types.js';
 
 /**
  * One accepted risk from destructive-diff.yml. Matches a finding by detection plus
@@ -14,7 +15,11 @@ export interface AcceptedRisk {
 }
 
 export interface DestructiveDiffConfig {
+  /** Stack to analyze; optional when the assembly contains exactly one stack. */
+  readonly stack: string | undefined;
   /** Severities that produce exit code 2. */
   readonly failOn: readonly Severity[];
   readonly acceptedRisks: readonly AcceptedRisk[];
+  /** User-supplied stateful types appended to the built-in rules. */
+  readonly extraStatefulResources: readonly StatefulResourceRule[];
 }

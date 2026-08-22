@@ -22,7 +22,13 @@ function makeFinding(overrides: Partial<Finding>): Finding {
 }
 
 function configWith(overrides: Partial<DestructiveDiffConfig>): DestructiveDiffConfig {
-  return { failOn: DEFAULT_FAIL_ON, acceptedRisks: [], ...overrides };
+  return {
+    stack: undefined,
+    failOn: DEFAULT_FAIL_ON,
+    acceptedRisks: [],
+    extraStatefulResources: [],
+    ...overrides,
+  };
 }
 
 describe('evaluateVerdict with the default fail_on', () => {

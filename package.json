@@ -20,7 +20,9 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@aws-cdk/cloudformation-diff": "2.187.3"
+    "@aws-cdk/cloudformation-diff": "2.187.3",
+    "@aws-sdk/client-cloudformation": "^3.1116.0",
+    "yaml": "^2.9.0"
   },
   "devDependencies": {
     "@types/node": "^26.2.0",

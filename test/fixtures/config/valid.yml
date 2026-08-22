@@ -1,0 +1,16 @@
+version: 1
+stack: PaymentsStack
+fail_on:
+  - data-loss
+  - orphan-on-replacement
+  - orphan-on-removal
+accepted_risks:
+  - construct_path: PaymentsStack/OrdersTable
+    detection: stateful-replacement
+    reason: "Key schema migration; data backfilled from S3 export (TICKET-123)"
+  - logical_id: LegacyQueueDEADBEEF
+    detection: stateful-deletion
+    reason: "Queue drained and consumers migrated 2026-08-01"
+extra_stateful_resources:
+  - resource_type: AWS::Timestream::Table
+    state_description: time-series records

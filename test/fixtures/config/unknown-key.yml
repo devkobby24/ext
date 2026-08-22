@@ -1,0 +1,3 @@
+version: 1
+fail_om:
+  - data-loss
