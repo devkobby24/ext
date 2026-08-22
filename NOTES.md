@@ -82,6 +82,22 @@ Decision log for driftguard. One entry per correction or non-obvious decision, w
 **Reason:** Both attribute docs state that Snapshot on a resource that doesn't support snapshots "reverts to the default option, which is `Delete`" — so a declared Snapshot is not automatically safe, and treating it as recoverable would understate e.g. a DynamoDB table replacement.
 **Evidence:** [UpdateReplacePolicy attribute documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-updatereplacepolicy.html) (reversion sentence, Delete default, value list) and the snapshot-capable resource lists on both attribute pages.
 
+## 2026-08-22 snapshot-on-unsupported-type split by attribute; earlier "both docs" claim was wrong
+
+**Proposed:** The earlier snapshot-reversion entry claimed "Both attribute docs state" the reversion, and both resolvers reverted a declared Snapshot to Delete (classifying as data loss).
+**Changed to:** Only UpdateReplacePolicy documents the reversion; that path keeps data-loss classification with the exact sentence quoted at the classification site. The DeletionPolicy page contains no reversion statement (verified by grepping the raw page text for "revert" and "support snapshot" variants), so that case now resolves to warning-level snapshot recovery with `Finding.detail` stating the outcome is inferred, not guaranteed. Policy sources split into `declared-snapshot-reverted` (documented) and `declared-snapshot-undocumented` (inferred).
+**Raised by:** Justice (directed the re-verification and the rule: pin to a specific documented statement or downgrade to a warning marked as inferred)
+**Reason:** As stated: "If you can't pin it to a specific documented statement, downgrade that case from data-loss to a warning and say in Finding.detail that the behavior is inferred." The earlier entry's evidence claim over-generalized one page's sentence to both pages.
+**Evidence:** UpdateReplacePolicy page: "If you specify the Snapshot option in the UpdateReplacePolicy for a resource that doesn't support snapshots, CloudFormation reverts to the default option, which is Delete." DeletionPolicy page: zero matches for reversion phrasing (checked 2026-08-22).
+
+## 2026-08-22 project rename: "drift" is the wrong word (name pending)
+
+**Proposed:** Keep the working name driftguard and dodge the npm conflict with a scope or suffix.
+**Changed to:** Rename entirely before anything bakes the name in (bin name, config filename, README).
+**Raised by:** Justice
+**Reason:** As stated: "drift" already means deployed-state divergence in IaC (CloudFormation drift detection, cdk drift) and this tool does something else — the npm conflict is a prompt to fix a naming error, not just to dodge it.
+**Evidence:** CloudFormation drift detection and the `cdk drift` command are established usages of the term for live-state divergence from the template, which this tool does not measure.
+
 ## 2026-08-22 npm package name "driftguard" is taken (deferred)
 
 **Proposed:** Publish as `driftguard`, runnable via `npx driftguard`.
