@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        # Node 20 is the minimum supported (engines), 22 is active LTS.
+        node-version: [20.x, 22.x]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: npm
+      - run: npm ci
+      - run: npx tsc --noEmit
+      - run: npm run build
+      - run: npm test
+      # The gate must gate itself: run the built CLI against the fixture
+      # assembly with a destructive deployed-template and require exit 2.
+      - name: CLI self-check expects a blocked deploy
+        run: |
+          set +e
+          node dist/cli.js --app test/fixtures/assembly --deployed-template test/fixtures/deployed/demo-stack-deployed.json
+          code=$?
+          set -e
+          if [ "$code" -ne 2 ]; then
+            echo "expected exit 2 (policy violation), got $code"
+            exit 1
+          fi
