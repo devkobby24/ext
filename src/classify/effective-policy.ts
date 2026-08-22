@@ -6,7 +6,13 @@ import {
 } from '../rules/types.js';
 import { isRecord } from '../util/json.js';
 
-export type PolicySource = 'declared' | 'inferred-default' | 'declared-snapshot-unsupported';
+export type PolicySource =
+  | 'declared'
+  | 'inferred-default'
+  /** UpdateReplacePolicy: Snapshot on a type without snapshot support; documented reversion to Delete. */
+  | 'declared-snapshot-reverted'
+  /** DeletionPolicy: Snapshot on a type without snapshot support; behavior is undocumented. */
+  | 'declared-snapshot-undocumented';
 
 export interface EffectivePolicy {
   readonly policy: DeclaredPolicyValue;
@@ -47,27 +53,6 @@ function hasProperty(resource: TemplateResource, propertyName: string): boolean 
   return isRecord(resource.Properties) && resource.Properties[propertyName] !== undefined;
 }
 
-function revertUnsupportedSnapshot(
-  declared: DeclaredPolicyValue,
-  attributeName: 'DeletionPolicy' | 'UpdateReplacePolicy',
-  rule: StatefulResourceRule,
-): EffectivePolicy {
-  if (declared === 'Snapshot' && !rule.supportsSnapshotPolicy) {
-    return {
-      policy: 'Delete',
-      source: 'declared-snapshot-unsupported',
-      explanation:
-        `${attributeName}: Snapshot (declared), but ${rule.resourceType} does not support ` +
-        `snapshot policies, so CloudFormation reverts to Delete`,
-    };
-  }
-  return {
-    policy: declared,
-    source: 'declared',
-    explanation: `${attributeName}: ${declared} (declared)`,
-  };
-}
-
 /**
  * Resolve the DeletionPolicy that governs a resource being removed from the
  * stack, honoring CloudFormation's per-type defaults and the documented
@@ -84,7 +69,29 @@ export function resolveDeletionPolicy(
     rule.resourceType,
   );
   if (declared !== undefined) {
-    return revertUnsupportedSnapshot(declared, 'DeletionPolicy', rule);
+    if (declared === 'Snapshot' && !rule.supportsSnapshotPolicy) {
+      // The DeletionPolicy documentation lists which resource types support
+      // snapshots but — unlike UpdateReplacePolicy — defines no behavior for a
+      // Snapshot policy declared on any other type (verified 2026-08-22: the
+      // page contains no reversion statement). The outcome is therefore
+      // inferred, not documented: reported as warning-level snapshot recovery
+      // with the uncertainty stated, never as guaranteed recovery and never
+      // silently as data loss.
+      // https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-deletionpolicy.html
+      return {
+        policy: 'Snapshot',
+        source: 'declared-snapshot-undocumented',
+        explanation:
+          `DeletionPolicy: Snapshot (declared), but ${rule.resourceType} is not in CloudFormation's ` +
+          `snapshot-capable list and the documentation does not define this combination's behavior — ` +
+          `snapshot recovery is inferred, not guaranteed; verify before relying on it`,
+      };
+    }
+    return {
+      policy: declared,
+      source: 'declared',
+      explanation: `DeletionPolicy: ${declared} (declared)`,
+    };
   }
 
   const defaultRule = rule.defaultDeletionPolicy;
@@ -132,7 +139,24 @@ export function resolveUpdateReplacePolicy(
     rule.resourceType,
   );
   if (declared !== undefined) {
-    return revertUnsupportedSnapshot(declared, 'UpdateReplacePolicy', rule);
+    if (declared === 'Snapshot' && !rule.supportsSnapshotPolicy) {
+      // Documented: "If you specify the Snapshot option in the
+      // UpdateReplacePolicy for a resource that doesn't support snapshots,
+      // CloudFormation reverts to the default option, which is Delete."
+      // https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-updatereplacepolicy.html
+      return {
+        policy: 'Delete',
+        source: 'declared-snapshot-reverted',
+        explanation:
+          `UpdateReplacePolicy: Snapshot (declared), but ${rule.resourceType} does not support ` +
+          `snapshot policies, so CloudFormation reverts to Delete`,
+      };
+    }
+    return {
+      policy: declared,
+      source: 'declared',
+      explanation: `UpdateReplacePolicy: ${declared} (declared)`,
+    };
   }
   return {
     policy: 'Delete',

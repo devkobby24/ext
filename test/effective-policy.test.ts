@@ -59,13 +59,15 @@ describe('resolveDeletionPolicy', () => {
     expect(resolved).toMatchObject({ policy: 'Delete', source: 'inferred-default' });
   });
 
-  it('reverts a declared Snapshot to Delete on a type that does not support snapshots', () => {
+  it('keeps a declared Snapshot on an unsupported type but marks the behavior undocumented', () => {
+    // Unlike UpdateReplacePolicy, the DeletionPolicy docs define no reversion
+    // for this combination, so the outcome is inferred and must say so.
     const resolved = resolveDeletionPolicy(
       { DeletionPolicy: 'Snapshot' },
       ruleFor('AWS::DynamoDB::Table'),
     );
-    expect(resolved).toMatchObject({ policy: 'Delete', source: 'declared-snapshot-unsupported' });
-    expect(resolved.explanation).toContain('does not support snapshot policies');
+    expect(resolved).toMatchObject({ policy: 'Snapshot', source: 'declared-snapshot-undocumented' });
+    expect(resolved.explanation).toContain('inferred, not guaranteed');
   });
 });
 
@@ -93,5 +95,14 @@ describe('resolveUpdateReplacePolicy', () => {
       ruleFor('AWS::RDS::DBInstance'),
     );
     expect(resolved).toMatchObject({ policy: 'Snapshot', source: 'declared' });
+  });
+
+  it('reverts a declared Snapshot to Delete on an unsupported type (documented reversion)', () => {
+    const resolved = resolveUpdateReplacePolicy(
+      { UpdateReplacePolicy: 'Snapshot' },
+      ruleFor('AWS::DynamoDB::Table'),
+    );
+    expect(resolved).toMatchObject({ policy: 'Delete', source: 'declared-snapshot-reverted' });
+    expect(resolved.explanation).toContain('reverts to Delete');
   });
 });

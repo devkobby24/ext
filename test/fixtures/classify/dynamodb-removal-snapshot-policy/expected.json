@@ -1,0 +1,11 @@
+[
+  {
+    "detection": "stateful-deletion",
+    "severity": "snapshot-recoverable",
+    "certainty": "will",
+    "logicalId": "OrdersTable315BB997",
+    "constructPath": "DemoStack/OrdersTable",
+    "resourceType": "AWS::DynamoDB::Table",
+    "detailIncludes": ["snapshot-capable list", "inferred, not guaranteed"]
+  }
+]
