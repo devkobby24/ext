@@ -1,6 +1,6 @@
 # NOTES
 
-Decision log for driftguard. One entry per correction or non-obvious decision, written when the decision is made. Corrections are logged in both directions. This is not a changelog — git has the changelog.
+Decision log for destructive-diff (formerly working-named driftguard; entries below the rename keep the old name verbatim). One entry per correction or non-obvious decision, written when the decision is made. Corrections are logged in both directions. This is not a changelog — git has the changelog.
 
 ## 2026-08-22 manifest.json no longer inlines logical-ID metadata
 
@@ -97,6 +97,14 @@ Decision log for driftguard. One entry per correction or non-obvious decision, w
 **Raised by:** Justice
 **Reason:** As stated: "drift" already means deployed-state divergence in IaC (CloudFormation drift detection, cdk drift) and this tool does something else — the npm conflict is a prompt to fix a naming error, not just to dodge it.
 **Evidence:** CloudFormation drift detection and the `cdk drift` command are established usages of the term for live-state divergence from the template, which this tool does not measure.
+
+## 2026-08-22 renamed to destructive-diff, bin alias destdiff
+
+**Proposed:** Candidates lossgate (Claude's recommendation), destructive-diff, teardown-gate, demolition-diff, razegate — all verified free on npm with no exact-name GitHub or AWS/CDK tool collisions.
+**Changed to:** destructive-diff, with short bin alias destdiff (verified free on npm, no GitHub repos). lossgate, teardown-gate, and razegate rejected as a family.
+**Raised by:** Justice
+**Reason:** As stated: the -gate suffix reads as scandal in English, not as a CI gate; destructive-diff is searchable by the problem it solves, which matters for adoption. (This also resolved the earlier rename decision: "drift" was a naming error, not just an npm conflict — it means deployed-state divergence in IaC, which this tool does not measure.)
+**Evidence:** `npm view` 404s for destructive-diff and destdiff on 2026-08-22; `gh search repos` shows no exact-name projects.
 
 ## 2026-08-22 npm package name "driftguard" is taken (deferred)
 

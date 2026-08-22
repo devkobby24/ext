@@ -1,5 +1,5 @@
 {
-  "name": "driftguard",
+  "name": "destructive-diff",
   "version": "0.1.0",
   "description": "Destructive-change gate for AWS CDK deployments",
   "type": "module",

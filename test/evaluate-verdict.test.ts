@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest';
 import {
   DEFAULT_FAIL_ON,
   evaluateVerdict,
-  type DriftguardConfig,
+  type DestructiveDiffConfig,
   type Finding,
 } from '../src/index.js';
 
@@ -21,7 +21,7 @@ function makeFinding(overrides: Partial<Finding>): Finding {
   };
 }
 
-function configWith(overrides: Partial<DriftguardConfig>): DriftguardConfig {
+function configWith(overrides: Partial<DestructiveDiffConfig>): DestructiveDiffConfig {
   return { failOn: DEFAULT_FAIL_ON, acceptedRisks: [], ...overrides };
 }
 

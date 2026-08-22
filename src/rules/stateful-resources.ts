@@ -2,7 +2,7 @@ import type { StatefulResourceRule } from './types.js';
 
 /**
  * The v0.1 detection rules: resource types whose replacement or deletion puts
- * data at risk. Extending driftguard means adding a row here (or via the
+ * data at risk. Extending destructive-diff means adding a row here (or via the
  * extra_stateful_resources config key), not writing code.
  *
  * defaultPolicyJustification cites the attribute documentation that defines

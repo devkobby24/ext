@@ -153,7 +153,7 @@ function nestedStackFinding(
     constructPath: resolveConstructPath(logicalId, change, constructPathsByLogicalId),
     resourceType: NESTED_STACK_RESOURCE_TYPE,
     detail:
-      `Nested stack is ${changeKind}. driftguard v0.1 does not analyze nested stack templates; ` +
+      `Nested stack is ${changeKind}. destructive-diff v0.1 does not analyze nested stack templates; ` +
       `review the nested stack diff manually.`,
     justification: NESTED_STACK_JUSTIFICATION,
   };

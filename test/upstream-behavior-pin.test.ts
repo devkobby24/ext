@@ -32,7 +32,7 @@ describe('upstream removal impact classification', () => {
 
   it('still misclassifies RetainExceptOnCreate and Snapshot as WILL_DESTROY', () => {
     // Known upstream bug, filed as https://github.com/aws/aws-cdk-cli/issues/1882.
-    // driftguard resolves policies itself and does not depend on these values;
+    // destructive-diff resolves policies itself and does not depend on these values;
     // if this test fails after an upgrade, upstream fixed the classification —
     // re-check OUTCOME_BY_EFFECTIVE_POLICY assumptions and update NOTES.md.
     expect(removalImpact('RetainExceptOnCreate')).toBe(ResourceImpact.WILL_DESTROY);

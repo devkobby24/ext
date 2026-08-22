@@ -1,5 +1,5 @@
 import type { Finding } from '../classify/types.js';
-import type { AcceptedRisk, DriftguardConfig } from '../config/types.js';
+import type { AcceptedRisk, DestructiveDiffConfig } from '../config/types.js';
 
 export interface AcceptedFinding {
   readonly finding: Finding;
@@ -21,7 +21,7 @@ export interface Verdict {
  * whose worst case is recoverable does not block, an uncertain one whose
  * worst case destroys data does.
  */
-export function evaluateVerdict(findings: readonly Finding[], config: DriftguardConfig): Verdict {
+export function evaluateVerdict(findings: readonly Finding[], config: DestructiveDiffConfig): Verdict {
   for (const risk of config.acceptedRisks) {
     assertValidAcceptedRisk(risk);
   }
