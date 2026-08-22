@@ -1,0 +1,16 @@
+{
+  "Resources": {
+    "AnalyticsDbB7A15C22": {
+      "Type": "AWS::RDS::DBInstance",
+      "Properties": {
+        "DBInstanceClass": "db.t3.micro",
+        "Engine": "postgres",
+        "AllocatedStorage": "20",
+        "StorageType": "io1"
+      },
+      "UpdateReplacePolicy": "Snapshot",
+      "DeletionPolicy": "Snapshot",
+      "Metadata": { "aws:cdk:path": "DemoStack/AnalyticsDb/Resource" }
+    }
+  }
+}

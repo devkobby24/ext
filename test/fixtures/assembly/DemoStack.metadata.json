@@ -1,0 +1,93 @@
+{
+  "/DemoStack": [
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "file:///private/tmp/claude-501/-Users-justice-Desktop-dev-ext/3e886aa5-8c3a-4b8f-a920-8b56350ad316/scratchpad/probe/cdkapp/app.mjs:6: (file:///private/tmp/claude-501/-Users-justice-Desktop-dev-ext/3e886aa5-8c3a-4b8f-a920-8b56350ad316/scratchpad/probe/cdkapp/app.mjs:6:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/DemoStack/BootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "BootstrapVersion"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/DemoStack/CheckBootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CheckBootstrapVersion"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/DemoStack/OrdersTable/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "OrdersTable315BB997"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Table2 in aws-cdk-lib...",
+        "file:///private/tmp/claude-501/-Users-justice-Desktop-dev-ext/3e886aa5-8c3a-4b8f-a920-8b56350ad316/scratchpad/probe/cdkapp/app.mjs:7 (:)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/DemoStack/AssetsBucket/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AssetsBucket5CB76180"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Bucket2 in aws-cdk-lib...",
+        "file:///private/tmp/claude-501/-Users-justice-Desktop-dev-ext/3e886aa5-8c3a-4b8f-a920-8b56350ad316/scratchpad/probe/cdkapp/app.mjs:12 (:)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/DemoStack/CDKMetadata/Default": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CDKMetadata"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...App.synth in aws-cdk-lib...",
+        "file:///private/tmp/claude-501/-Users-justice-Desktop-dev-ext/3e886aa5-8c3a-4b8f-a920-8b56350ad316/scratchpad/probe/cdkapp/app.mjs:13 (:)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/DemoStack/CDKMetadata/Condition": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CDKMetadataAvailable"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...App.synth in aws-cdk-lib...",
+        "file:///private/tmp/claude-501/-Users-justice-Desktop-dev-ext/3e886aa5-8c3a-4b8f-a920-8b56350ad316/scratchpad/probe/cdkapp/app.mjs:13 (:)",
+        "...node internals..."
+      ]
+    }
+  ]
+}

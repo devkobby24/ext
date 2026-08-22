@@ -1,0 +1,11 @@
+[
+  {
+    "detection": "stateful-replacement",
+    "severity": "orphan-on-replacement",
+    "certainty": "will",
+    "logicalId": "OrdersTable315BB997",
+    "constructPath": "DemoStack/OrdersTable",
+    "resourceType": "AWS::DynamoDB::Table",
+    "detailIncludes": ["UpdateReplacePolicy: Retain (declared)", "detached and kept", "empty replacement takes over"]
+  }
+]

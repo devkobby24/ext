@@ -1,0 +1,11 @@
+[
+  {
+    "detection": "nested-stack-not-analyzed",
+    "severity": "notice",
+    "certainty": "will",
+    "logicalId": "StorageNestedStackStorageNestedStackResource91C42AF1",
+    "constructPath": "DemoStack/Storage.NestedStack/Storage.NestedStackResource",
+    "resourceType": "AWS::CloudFormation::Stack",
+    "detailIncludes": ["not analyze nested stack templates", "review the nested stack diff manually"]
+  }
+]

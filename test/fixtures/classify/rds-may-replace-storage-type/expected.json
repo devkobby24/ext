@@ -1,0 +1,11 @@
+[
+  {
+    "detection": "stateful-replacement",
+    "severity": "snapshot-recoverable",
+    "certainty": "may",
+    "logicalId": "AnalyticsDbB7A15C22",
+    "constructPath": "DemoStack/AnalyticsDb",
+    "resourceType": "AWS::RDS::DBInstance",
+    "detailIncludes": ["StorageType", "may force replacement", "UpdateReplacePolicy: Snapshot (declared)"]
+  }
+]

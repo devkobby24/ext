@@ -1,0 +1,9 @@
+{
+  "Resources": {
+    "StorageNestedStackStorageNestedStackResource91C42AF1": {
+      "Type": "AWS::CloudFormation::Stack",
+      "Properties": { "TemplateURL": "https://s3.amazonaws.com/cdk-assets/storage-aaa.json" },
+      "Metadata": { "aws:cdk:path": "DemoStack/Storage.NestedStack/Storage.NestedStackResource" }
+    }
+  }
+}

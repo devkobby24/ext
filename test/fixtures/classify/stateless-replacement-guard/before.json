@@ -1,0 +1,9 @@
+{
+  "Resources": {
+    "ServiceSg1F8D2A44": {
+      "Type": "AWS::EC2::SecurityGroup",
+      "Properties": { "GroupDescription": "service traffic" },
+      "Metadata": { "aws:cdk:path": "DemoStack/ServiceSg/Resource" }
+    }
+  }
+}

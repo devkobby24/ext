@@ -1,0 +1,11 @@
+[
+  {
+    "detection": "stateful-deletion",
+    "severity": "data-loss",
+    "certainty": "will",
+    "logicalId": "IngestQueue8D42E1B3",
+    "constructPath": "DemoStack/IngestQueue",
+    "resourceType": "AWS::SQS::Queue",
+    "detailIncludes": ["queued messages will be deleted", "DeletionPolicy: Delete (declared)"]
+  }
+]

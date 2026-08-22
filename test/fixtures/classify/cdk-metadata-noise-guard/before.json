@@ -1,0 +1,9 @@
+{
+  "Resources": {
+    "CDKMetadata": {
+      "Type": "AWS::CDK::Metadata",
+      "Properties": { "Analytics": "v2:deflate64:AAAA" },
+      "Metadata": { "aws:cdk:path": "DemoStack/CDKMetadata/Default" }
+    }
+  }
+}

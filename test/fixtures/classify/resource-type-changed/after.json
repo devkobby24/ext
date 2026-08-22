@@ -1,0 +1,9 @@
+{
+  "Resources": {
+    "EventsStore4F1A9C88": {
+      "Type": "AWS::SNS::Topic",
+      "Properties": { "TopicName": "events" },
+      "Metadata": { "aws:cdk:path": "DemoStack/EventsStore/Resource" }
+    }
+  }
+}

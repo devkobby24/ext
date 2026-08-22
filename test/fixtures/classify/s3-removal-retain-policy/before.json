@@ -1,0 +1,10 @@
+{
+  "Resources": {
+    "AssetsBucket5CB76180": {
+      "Type": "AWS::S3::Bucket",
+      "UpdateReplacePolicy": "Retain",
+      "DeletionPolicy": "Retain",
+      "Metadata": { "aws:cdk:path": "DemoStack/AssetsBucket/Resource" }
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "Resources": {
+    "IngestQueue8D42E1B3": {
+      "Type": "AWS::SQS::Queue",
+      "Properties": { "VisibilityTimeout": 300 },
+      "UpdateReplacePolicy": "Delete",
+      "DeletionPolicy": "Delete",
+      "Metadata": { "aws:cdk:path": "DemoStack/IngestQueue/Resource" }
+    }
+  }
+}

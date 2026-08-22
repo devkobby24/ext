@@ -1,0 +1,11 @@
+[
+  {
+    "detection": "stateful-deletion",
+    "severity": "data-loss",
+    "certainty": "will",
+    "logicalId": "EventsStore4F1A9C88",
+    "constructPath": "DemoStack/EventsStore",
+    "resourceType": "AWS::DynamoDB::Table",
+    "detailIncludes": ["table items", "DeletionPolicy: Delete (declared)"]
+  }
+]

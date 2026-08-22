@@ -1,0 +1,11 @@
+[
+  {
+    "detection": "stateful-replacement",
+    "severity": "data-loss",
+    "certainty": "will",
+    "logicalId": "OrdersTable315BB997",
+    "constructPath": "DemoStack/OrdersTable",
+    "resourceType": "AWS::DynamoDB::Table",
+    "detailIncludes": ["does not support snapshot policies", "reverts to Delete"]
+  }
+]

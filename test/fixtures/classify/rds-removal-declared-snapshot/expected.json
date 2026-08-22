@@ -1,0 +1,11 @@
+[
+  {
+    "detection": "stateful-deletion",
+    "severity": "snapshot-recoverable",
+    "certainty": "will",
+    "logicalId": "AnalyticsDbB7A15C22",
+    "constructPath": "DemoStack/AnalyticsDb",
+    "resourceType": "AWS::RDS::DBInstance",
+    "detailIncludes": ["final snapshot", "DeletionPolicy: Snapshot (declared)"]
+  }
+]

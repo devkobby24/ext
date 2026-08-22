@@ -1,0 +1,11 @@
+[
+  {
+    "detection": "stateful-deletion",
+    "severity": "orphan-on-removal",
+    "certainty": "will",
+    "logicalId": "AssetsBucket5CB76180",
+    "constructPath": "DemoStack/AssetsBucket",
+    "resourceType": "AWS::S3::Bucket",
+    "detailIncludes": ["keeps running outside the stack", "manual cleanup required", "DeletionPolicy: Retain (declared)"]
+  }
+]
