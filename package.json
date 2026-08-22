@@ -10,6 +10,10 @@
   "exports": {
     ".": "./dist/index.js"
   },
+  "bin": {
+    "destructive-diff": "dist/cli.js",
+    "destdiff": "dist/cli.js"
+  },
   "types": "./dist/index.d.ts",
   "files": [
     "dist"
